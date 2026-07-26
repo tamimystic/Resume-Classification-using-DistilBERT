@@ -1,0 +1,14 @@
+pandas
+numpy
+scikit-learn
+torch
+transformers
+datasets
+pyarrow
+fastapi
+uvicorn
+gradio
+dill
+pyyaml
+PyMuPDF
+python-docx
