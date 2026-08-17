@@ -17,7 +17,13 @@ except Exception as e:
 
 summarization_pipeline = SummarizationPipeline()
 
-def predict_resume(text_input, file_input):
+try:
+    import spaces
+    USING_SPACES_GPU = True
+except ImportError:
+    USING_SPACES_GPU = False
+
+def _predict_resume(text_input, file_input):
     if not prediction_pipeline:
         return "<div class='error-msg'>Model not loaded successfully. Please check the logs.</div>"
     
@@ -55,6 +61,11 @@ def predict_resume(text_input, file_input):
         """
     except Exception as e:
         return f"<div class='error-msg'>Error during prediction: {str(e)}</div>"
+
+if USING_SPACES_GPU:
+    predict_resume = spaces.GPU(_predict_resume)
+else:
+    predict_resume = _predict_resume
 
 custom_css = """
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
@@ -313,7 +324,7 @@ footer { display: none !important; }
 }
 """
 
-with gr.Blocks(title="AI Resume Intelligence", theme=gr.themes.Base()) as demo:
+with gr.Blocks(title="AI Resume Intelligence") as demo:
     gr.HTML("<div class='main-wrapper'>")
     
     gr.HTML("""
