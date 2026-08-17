@@ -1,3 +1,14 @@
+---
+title: Resume Checker
+emoji: 📄
+colorFrom: indigo
+colorTo: blue
+sdk: gradio
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # AI Resume Intelligence
 
 An advanced NLP-based Resume Screening and Classification system designed to automate the categorization of resumes into 24 distinct job industries, extract document text using intelligent OCR fallbacks, and generate concise profile summaries.
