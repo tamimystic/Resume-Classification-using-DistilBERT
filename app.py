@@ -1,3 +1,9 @@
+try:
+    import spaces
+    USING_SPACES_GPU = True
+except ImportError:
+    USING_SPACES_GPU = False
+
 import gradio as gr
 import os
 from resume_classifier.pipeline.prediction_pipeline import PredictionPipeline
@@ -16,12 +22,6 @@ except Exception as e:
     prediction_pipeline = None
 
 summarization_pipeline = SummarizationPipeline()
-
-try:
-    import spaces
-    USING_SPACES_GPU = True
-except ImportError:
-    USING_SPACES_GPU = False
 
 def _predict_resume(text_input, file_input):
     if not prediction_pipeline:
